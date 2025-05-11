@@ -234,6 +234,31 @@ def player_stats(player_name):
     player = find_player(player_name)
     return player if player else 'player not found'
 
+        # challenge
+# create empty dict  => REBOUNDS_BY_BRANDS = {'brand one': [] ....}
+# iterate match =>capture both teams, 
+    # LOOP and forEach player, GET shoebrand and rebounds
+        # IF shoebrand not in REBOUNDS_BY_BRANDS, 
+            # add to REBOUNDS_BY_BRANDS via KEY and []
+        # ELSE APPEND to REBOUNDS_BY_BRANDS
+    # foreach brand, do AVERAGE
+        # PRINT .2F
+def average_rebounds_by_shoe_brand():
+    rebounds_by_brand = {}
+    for team in match.values():
+        for player in team['players']:
+            shoe_brand = player['shoe_brand']
+            rebounds_per_game = player['rebounds_per_game']
+
+            if shoe_brand not in rebounds_by_brand:
+                rebounds_by_brand[shoe_brand] = [rebounds_per_game]
+            else:
+                rebounds_by_brand[shoe_brand].append(rebounds_per_game)
+    for shoe_brand, rebounds in rebounds_by_brand.items():
+        rebounds_average = sum(rebounds) / len(rebounds)
+        print(f'{rebounds_average: .2f}')
+
+print(average_rebounds_by_shoe_brand())
 
         
 
