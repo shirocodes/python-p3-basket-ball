@@ -238,7 +238,7 @@ def player_stats(player_name):
             # add to REBOUNDS_BY_BRANDS via KEY and []
         # ELSE APPEND to REBOUNDS_BY_BRANDS
     # foreach brand, do AVERAGE
-        # PRINT .2F
+        # PRINT AVERAGE in 2 decimal places => float
 def average_rebounds_by_shoe_brand():
     rebounds_by_brand = {}
     for team in match.values():
@@ -253,8 +253,25 @@ def average_rebounds_by_shoe_brand():
     for shoe_brand, rebounds in rebounds_by_brand.items():
         rebounds_average = sum(rebounds) / len(rebounds)
         print(f'{rebounds_average: .2f}')
-print(average_rebounds_by_shoe_brand())
-
-        
 
 
+    # additional Practice 
+# return player with most career points
+# initialize MAX_POINTS = 0
+# set TOP_PLAYER = NONE
+# LOOP through TEAMS in MATCH
+    # foreach PLAYER in TEAM[PLAYERS]:
+        # IF player's CAREER_POINTS > MAX_POINTS
+            # SET MAX_POINTS to player's CAREER_POINTS
+            # SET PLAYER as the TOP_PLAYER
+# RETURN player's name and MAX_POINTS
+def player_with_most_careerpoints():
+    max_career_points = 0
+    top_player = None
+    for team in match.values():
+        for player in team['players']:
+            if player['career_points'] > max_career_points:
+                max_career_points = player['career_points']
+                top_player = player
+    return(f"{top_player['name']}: {max_career_points}")
+print(player_with_most_careerpoints())
