@@ -182,3 +182,59 @@ def game_dict():
             ]
         }
     }
+
+match = game_dict()
+
+# helper functions
+def find_player(player_name):
+    for team in match.values():
+        for player in team['players']:
+            if player['name'].lower() == player_name.lower():
+                return player
+    return None
+
+def find_teamname(team_name):
+    for team in match.values():
+        if team['team_name'].lower() == team_name.lower():
+            return team
+    return None
+
+# # return player's points
+# def num_points_per_game(player_name):
+#     player = find_player(player_name)
+#     if player:
+#         return player['points_per_game']
+#     return 'player not found'
+
+# # return player's age
+# def player_age(player_name):
+#     player = find_player(player_name)
+#     if player:
+#         return player['age']
+#     return 'player not found'
+
+# # return team's colors
+# def team_colors(team_name):
+#     team = find_teamname(team_name)
+#     return team['colors'] if team else 'team not found'
+
+# # return list of teamnames
+# def team_names():
+#    return [team['team_name'] for team in match.values()]
+
+# # return list of a team's jersey numbers
+# def player_numbers(team_name):
+#     team = find_teamname(team_name)
+#     if team:
+#         return [player['number'] for player in team['players']]
+#     return 'team not found'
+
+# # return player's stats
+# def player_stats(player_name):
+#     player = find_player(player_name)
+#     return player if player else 'player not found'
+
+
+        
+
+
