@@ -202,16 +202,12 @@ def find_teamname(team_name):
 # return player's points
 def num_points_per_game(player_name):
     player = find_player(player_name)
-    if player:
-        return player['points_per_game']
-    return 'player not found'
+    return player['points_per_game'] if player else 'player not found'
 
 # return player's age
 def player_age(player_name):
     player = find_player(player_name)
-    if player:
-        return player['age']
-    return 'player not found'
+    return player['age'] if player else 'player not found'
 
 # return team's colors
 def team_colors(team_name):
@@ -257,7 +253,6 @@ def average_rebounds_by_shoe_brand():
     for shoe_brand, rebounds in rebounds_by_brand.items():
         rebounds_average = sum(rebounds) / len(rebounds)
         print(f'{rebounds_average: .2f}')
-
 print(average_rebounds_by_shoe_brand())
 
         
