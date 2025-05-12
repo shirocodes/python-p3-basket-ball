@@ -183,22 +183,33 @@ def game_dict():
         }
     }
 
+# assign game_dict globally, for reusability in all functions
 match = game_dict()
 
-# helper functions
-def find_player(player_name):
+    # helper functions
+# three functions are using => for team in match.values():
+    # for player in team['players']: so, substitute with
+def players_in_match():
+    players_list = []
     for team in match.values():
         for player in team['players']:
-            if player['name'].lower() == player_name.lower():
-                return player
-    return None
+            players_list.append(player)
+    return players_list
 
+# three functions need this: 
+def find_player(player_name):
+    for player in players_in_match():
+        if player['name'].lower() == player_name.lower():
+            return player
+    return None
+# three functions need this: 
 def find_teamname(team_name):
     for team in match.values():
         if team['team_name'].lower() == team_name.lower():
             return team
     return None
 
+    # creating functions to:
 # return player's points
 def num_points_per_game(player_name):
     player = find_player(player_name)
@@ -241,19 +252,17 @@ def player_stats(player_name):
         # PRINT AVERAGE in 2 decimal places => float
 def average_rebounds_by_shoe_brand():
     rebounds_by_brand = {}
-    for team in match.values():
-        for player in team['players']:
-            shoe_brand = player['shoe_brand']
-            rebounds_per_game = player['rebounds_per_game']
+    for player in players_in_match():
+        shoe_brand = player['shoe_brand']
+        rebounds_per_game = player['rebounds_per_game']
 
-            if shoe_brand not in rebounds_by_brand:
-                rebounds_by_brand[shoe_brand] = [rebounds_per_game]
-            else:
-                rebounds_by_brand[shoe_brand].append(rebounds_per_game)
+        if shoe_brand not in rebounds_by_brand:
+            rebounds_by_brand[shoe_brand] = [rebounds_per_game]
+        else:
+            rebounds_by_brand[shoe_brand].append(rebounds_per_game)
     for shoe_brand, rebounds in rebounds_by_brand.items():
         rebounds_average = sum(rebounds) / len(rebounds)
-        print(f'{rebounds_average: .2f}')
-
+        print(f'{shoe_brand}: {rebounds_average: .2f}')
 
     # additional Practice 
 # return player with most career points
@@ -268,10 +277,8 @@ def average_rebounds_by_shoe_brand():
 def player_with_most_careerpoints():
     max_career_points = 0
     top_player = None
-    for team in match.values():
-        for player in team['players']:
-            if player['career_points'] > max_career_points:
-                max_career_points = player['career_points']
-                top_player = player
+    for player in players_in_match():
+        if player['career_points'] > max_career_points:
+            max_career_points = player['career_points']
+            top_player = player
     return(f"{top_player['name']}: {max_career_points}")
-print(player_with_most_careerpoints())
